@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import wandb
 
 
-df = pd.read_csv("NER.csv")
+df = pd.read_csv("NER.csv",error_bad_lines=False)
 df = df.dropna()
 
 train, test = train_test_split(df, test_size=0.2)
