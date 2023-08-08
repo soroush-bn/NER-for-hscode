@@ -30,7 +30,7 @@ model_args = NERArgs()
 model_args.labels_list = df.labels.unique().tolist()
 model_args.classification_report=True
 model_args.wandb_project = "NER"
-model_args.num_train_epochs=1
+model_args.num_train_epochs=1000
 model_args.overwrite_output_dir = True
 model_args.reprocess_input_data = True
 
