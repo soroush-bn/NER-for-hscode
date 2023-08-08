@@ -9,7 +9,8 @@ import wandb
 df = pd.read_csv("NER.csv",error_bad_lines=False)
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
-
+df["labels"]=df.labels.map(str)
+df["sentence_id"]=df.sentence_id.map(str)
 train, test = train_test_split(df, test_size=0.2)
 test,validation = train_test_split(test, test_size=0.2)
 
