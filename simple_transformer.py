@@ -3,10 +3,11 @@ import numpy as np
 import pandas as pd
 import torch
 from sklearn.model_selection import train_test_split
-import wandb
+import wan
 
 
 df = pd.read_csv("NER.csv")
+df = df.dropna()
 
 train, test = train_test_split(df, test_size=0.2)
 test,validation = train_test_split(test, test_size=0.2)
