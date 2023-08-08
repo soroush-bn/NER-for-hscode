@@ -44,5 +44,7 @@ model = NERModel(
 
 model.train_model(train,output_dir='./out_train/',show_running_loss=True)
 
-result, model_outputs, wrong_preds = model.eval_model(eval_data,output_dir = "./out_eval/",verbose= True)
+result, model_outputs, wrong_preds = model.eval_model(validation,output_dir = "./out_eval/",verbose= True)
+print("results : " + str(results))
+print("wrong preds" + str(wrong_preds))
 wandb.join()
