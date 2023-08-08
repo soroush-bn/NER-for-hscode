@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import wandb
 
 
-df = pd.read_csv("NER2.csv",error_bad_lines=False)
+df = pd.read_csv("NER.csv",error_bad_lines=False)
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
 
@@ -31,6 +31,7 @@ model_args.classification_report=True
 model_args.wandb_project = "NER"
 model_args.num_train_epochs=1
 model_args.overwrite_output_dir = True
+model_args.reprocess_input_data = True
 
 
 
