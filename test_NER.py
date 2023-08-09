@@ -36,7 +36,7 @@ model_args.reprocess_input_data = True
 
 model = NERModel(
     model_type= "roberta",
-    model_name= "./out_train/checkpoint-333000-epoch-1000",
+    model_name= "./out_train/checkpoint-233100-epoch-700",
     labels =df.labels.unique().tolist(),
     args=model_args,
     use_cuda=True,
