@@ -49,4 +49,4 @@ while p!='0':
 
     print("prediction :  " + str(predictions))
     print("---------------------")
-    print("raw outputs :" + str(raw_outputs))
+    # print("raw outputs :" + str(raw_outputs))
