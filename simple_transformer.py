@@ -9,6 +9,7 @@ import wandb
 df = pd.read_csv("NER_final.csv",error_bad_lines=False)
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
+df.rename(columns={"tokens": "words", "tags": "labels"},inplace=True)
 df["labels"]=df.labels.map(str)
 df["sentence_id"]=df.sentence_id.map(str)
 train, test = train_test_split(df, test_size=0.2)
