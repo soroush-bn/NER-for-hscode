@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import wandb
 
 
-df = pd.read_csv("NER_IOB.csv",error_bad_lines=False)
+df = pd.read_csv("NER_final.csv",error_bad_lines=False)
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
 df["labels"]=df.labels.map(str)
