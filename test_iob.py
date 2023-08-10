@@ -9,9 +9,10 @@ import wandb
 
 
 
-df = pd.read_csv("NER.csv",error_bad_lines=False)
+df = pd.read_csv("NER_final.csv",error_bad_lines=False)
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
+df.rename(columns={"tokens": "words", "tags": "labels"},inplace=True)
 df["labels"]=df.labels.map(str)
 df["sentence_id"]=df.sentence_id.map(str)
 train, test = train_test_split(df, test_size=0.2)
@@ -21,16 +22,27 @@ cuda_available = torch.cuda.is_available()
 
 print(cuda_available)
 
+# wandb.login()
+# wandb.init(
+#     # set the wandb project where this run will be logged
+#     project="NER_IOB",
 
+# )
 
 
 model_args = NERArgs()
 model_args.labels_list = df.labels.unique().tolist()
 model_args.classification_report=True
-model_args.wandb_project = "NER"
+# model_args.wandb_project = "NER_IOB"
 model_args.num_train_epochs=1000
 model_args.overwrite_output_dir = True
 model_args.reprocess_input_data = True
+model_args.use_early_stopping = True
+model_args.early_stopping_delta = 0.01
+model_args.early_stopping_metric = "mcc"
+model_args.early_stopping_metric_minimize = False
+model_args.early_stopping_patience = 5
+model_args.evaluate_during_training_steps = 1000
 
 
 saved_model  = "./out_train_ner_iob/checkpoint-43086-epoch-129"
