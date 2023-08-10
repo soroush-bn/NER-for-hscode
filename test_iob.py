@@ -33,7 +33,7 @@ model_args.overwrite_output_dir = True
 model_args.reprocess_input_data = True
 
 
-saved_model  = "./out_train/checkpoint-43086-epoch-129"
+saved_model  = "./out_train_ner_iob/checkpoint-43086-epoch-129"
 model = NERModel(
     model_type= "roberta",
     model_name= saved_model,
