@@ -31,7 +31,7 @@ model_args = NERArgs()
 model_args.labels_list = df.labels.unique().tolist()
 model_args.classification_report=True
 model_args.wandb_project = "NER_BIO"
-model_args.num_train_epochs=500
+model_args.num_train_epochs=
 model_args.overwrite_output_dir = True
 model_args.reprocess_input_data = True
 model_args.use_early_stopping = True
@@ -42,9 +42,9 @@ model_args.early_stopping_patience = 5
 # model_args.evaluate_during_training = True
 # model_args.evaluate_during_training_steps = 100000
 # model_args.evaluate_during_training_verbose = True
-model_args.save_steps = -1 
-model_args.save_model_every_epoch = True
-model_args.train_batch_size = 32
+model_args.save_steps = 50000
+# model_args.save_model_every_epoch = True
+# model_args.train_batch_size = 32
 
 
 model = NERModel(
