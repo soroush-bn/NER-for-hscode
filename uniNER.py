@@ -1,15 +1,11 @@
 # Load model directly
-from transformers import AutoTokenizer, AutoModelForCausalLM
+# Use a pipeline as a high-level helper
+from transformers import pipeline
 
-tokenizer = AutoTokenizer.from_pretrained("Universal-NER/UniNER-7B-type",legacy=False)
-model = AutoModelForCausalLM.from_pretrained("Universal-NER/UniNER-7B-type")
+pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 
-#test
+text = str(input("enter your input : \n"))
+ 
 
-# prompt = 'Given a passage, your task is to extract all entities and identify their entity types. The output should be in a list of tuples of the following format: [("entity 1", "type of entity 1"), ... ].'
-prompt = str(input("please enter the text : \n"))
-inputs = tokenizer(prompt, return_tensors="pt")
-
-# Generate
-generate_ids = model.generate(inputs.input_ids, max_length=30)
-tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+result = pipe(text)
+print(result)
