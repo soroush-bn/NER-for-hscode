@@ -44,7 +44,7 @@ model_args.early_stopping_patience = 5
 # model_args.evaluate_during_training_verbose = True
 model_args.save_steps = -1 
 model_args.save_model_every_epoch = True
-model_args.train_batch_size = 1000
+model_args.train_batch_size = 100
 
 
 model = NERModel(
