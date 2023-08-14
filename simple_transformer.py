@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import wandb
 
 
-df = pd.read_csv("bioNER_final.csv",error_bad_lines=False)
+df = pd.read_csv("bioNER_final.csv")
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
 df.rename(columns={"tokens": "words", "tags": "labels"},inplace=True)
