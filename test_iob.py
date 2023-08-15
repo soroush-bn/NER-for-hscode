@@ -9,7 +9,7 @@ import wandb
 
 
 
-df = pd.read_csv("NER_final.csv")
+df = pd.read_csv("bioNER_final.csv")
 df = df.dropna()
 df = df.drop(["Unnamed: 0"],axis = 1 )
 df.rename(columns={"tokens": "words", "tags": "labels"},inplace=True)
