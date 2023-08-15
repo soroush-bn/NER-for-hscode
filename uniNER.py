@@ -1,6 +1,6 @@
 # Load model directly
 # Use a pipeline as a high-level helper
-from transformers import pipeline
+# from transformers import pipeline
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
