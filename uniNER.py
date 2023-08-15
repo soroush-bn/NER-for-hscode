@@ -22,7 +22,7 @@ print("loading model ..  \n")
 # model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 # tokenizer = AutoTokenizer.from_pretrained(name)
 
-prompt = '{} What describes Product in the text?'
+prompt = 'Given the following paragraph: {}, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
 pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 
 text = ''
