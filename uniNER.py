@@ -19,8 +19,8 @@ text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
 print("loading model ..  \n")
-model_8bit = AutoModelForCausalLM.from_pretrained(path, device_map="auto", load_in_8bit=True)
-tokenizer = AutoTokenizer.from_pretrained(path)
+model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
+tokenizer = AutoTokenizer.from_pretrained(name)
 
 
 # pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
