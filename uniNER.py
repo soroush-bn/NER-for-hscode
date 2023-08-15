@@ -25,12 +25,14 @@ print("loading model ..  \n")
 prompt = '{} What describes Product in the text?'
 pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 
-text = str(input("enter your input : \n"))
-input =  prompt.format(text)
+text = '0'
+while text != '0':
+    text = str(input("enter your input : \n"))
+    input =  prompt.format(text)
 
-result = pipe(input)
-
-# prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
+    result = pipe(input)
+    print(result)
+    # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
 # result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
 
 print(result)
