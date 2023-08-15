@@ -28,9 +28,9 @@ pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 text = ''
 while text != '0':
     text = str(input("enter your input : \n"))
-    input =  prompt.format(text)
+    input_pipe =  prompt.format(text)
 
-    result = pipe(input)
+    result = pipe(input_pipe)
     print(result)
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
 # result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
