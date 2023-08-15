@@ -14,7 +14,7 @@ def generate_from_model(text,model, tokenizer):
 
 
 
-max_new_tokens = 20
+max_new_tokens = 512
 text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
@@ -22,13 +22,13 @@ print("loading model ..  \n")
 # model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 # tokenizer = AutoTokenizer.from_pretrained(name)
 
-
+prompt = '{} What describes Product in the text?'
 pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 
 text = str(input("enter your input : \n"))
- 
+input =  prompt.format(text)
 
-result = pipe(text)
+result = pipe(input)
 
 # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
 # result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
