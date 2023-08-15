@@ -10,7 +10,8 @@ max_new_tokens = 512
 def generate_from_model(text,model, tokenizer):
   encoded_input = tokenizer(text, return_tensors='pt')
   output_sequences = model.generate(input_ids=encoded_input['input_ids'].cuda(),max_new_tokens=max_new_tokens )
-  return tokenizer.decode(output_sequences, skip_special_tokens=True)
+  print("out sequence is : " +  str(output_sequences))
+  return tokenizer.decode(output_sequences[0], skip_special_tokens=True)
 
 
 
