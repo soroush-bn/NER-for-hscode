@@ -32,3 +32,5 @@ tokenizer = AutoTokenizer.from_pretrained(name)
 # print(result)
 
 result  =generate_from_model("Where is my Fresh Kiwi Fruit ?",model_8bit,tokenizer)
+
+print(result)
