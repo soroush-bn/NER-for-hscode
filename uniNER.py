@@ -30,7 +30,7 @@ tokenizer = AutoTokenizer.from_pretrained(name)
 
 # result = pipe(text)
 # print(result)
-
-result  =generate_from_model("Where is my Fresh Kiwi Fruit ?",model_8bit,tokenizer)
+prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
+result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
 
 print(result)
