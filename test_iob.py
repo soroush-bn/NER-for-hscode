@@ -45,7 +45,7 @@ model_args.early_stopping_patience = 5
 model_args.evaluate_during_training_steps = 1000
 
 
-saved_model  = "./out_train_ner_iob/checkpoint-43086-epoch-129"
+saved_model  = "./out_train_ner_bio/checkpoint-302604-epoch-906"
 model = NERModel(
     model_type= "roberta",
     model_name= saved_model,
@@ -54,7 +54,7 @@ model = NERModel(
     use_cuda=True,
 )
 
-result, model_outputs, wrong_preds = model.eval_model(validation,output_dir = "./out_eval_ner_iob/",verbose= True)
+result, model_outputs, wrong_preds = model.eval_model(validation,output_dir = "./out_eval_ner_bio/",verbose= True)
 print("result : " + str(result))
 
 p = "1"
