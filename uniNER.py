@@ -19,18 +19,18 @@ text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
 print("loading model ..  \n")
-model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
-tokenizer = AutoTokenizer.from_pretrained(name)
+# model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
+# tokenizer = AutoTokenizer.from_pretrained(name)
 
 
-# pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
+pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 
-# text = str(input("enter your input : \n"))
+text = str(input("enter your input : \n"))
  
 
-# result = pipe(text)
-# print(result)
-prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
-result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
+result = pipe(text)
+
+# prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
+# result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
 
 print(result)
