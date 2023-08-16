@@ -30,8 +30,8 @@ text = ''
 while text != '0':
     text = str(input("enter your input : \n"))
     input_pipe =  prompt.format(text)
-    print("ur paragraph is :  \n" + str(input_pipe))
-    result  =generate_from_model(examples,model_8bit,tokenizer)
+    print("ur paragraph is :  \n" + str(text))
+    result  =generate_from_model(text,model_8bit,tokenizer)
 
     print("the result is : \n" + str(result))
     print()
