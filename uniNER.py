@@ -54,7 +54,7 @@ print("loading model ..  \n")
 llm = HuggingFacePipeline.from_model_id(
     model_id=name,
     task="text-generation",
-    model_kwargs={ "max_length": 1000},
+    model_kwargs={ "max_new_tokens": max_new_tokens},
 )
 template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
@@ -75,11 +75,11 @@ def ask_question(paragraph):
     print(result)
 
 
-model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
-tokenizer = AutoTokenizer.from_pretrained(name)
+# model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
+# tokenizer = AutoTokenizer.from_pretrained(name)
 
-pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
-recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
+# pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
+# recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
 
 # model_id = "lmsys/fastchat-t5-3b-v1.0"
 
