@@ -54,7 +54,7 @@ print("loading model ..  \n")
 llm = HuggingFacePipeline.from_model_id(
     model_id=name,
     task="text-generation",
-    model_kwargs={"temperature": 0, "max_length": 1000},
+    model_kwargs={ "max_length": 1000},
 )
 template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
