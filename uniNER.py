@@ -16,7 +16,7 @@ def generate_from_model(text,model, tokenizer):
 
 examples = [{"conversations": [{"from": "human", "value": f"Text: I want some Fresh Kiwi Fruits"}, {"from": "gpt", "value": "I've read this text."}, {"from": "human", "value": f"What describes Product in the text?"}, {"from": "gpt", "value": "[]"}]}]
         
-prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
+prompt = 'Given the paragraph: {}, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
 text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
@@ -30,8 +30,8 @@ text = ''
 while text != '0':
     text = str(input("enter your input : \n"))
     input_pipe =  prompt.format(text)
-    print("ur paragraph is :  \n" + str(text))
-    result  =generate_from_model(text,model_8bit,tokenizer)
+    print("ur paragraph is :  \n" + str(input_pipe))
+    result  =generate_from_model(input_pipe,model_8bit,tokenizer)
 
     print("the result is : \n" + str(result))
     print()
