@@ -54,7 +54,7 @@ tokenizer = AutoTokenizer.from_pretrained(name)
 
 pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
 recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
-text = ''
+text = '1'
 while text != '0':
     if text == '' : continue  
     text = str(input("enter your input : \n"))
