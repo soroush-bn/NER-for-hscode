@@ -14,7 +14,7 @@ from langchain import PromptTemplate, LLMChain
 #     max_new_tokens=32,
 # )
 
-max_new_tokens = 512
+max_new_tokens = 1024
 def generate_from_model(text,model, tokenizer):
   encoded_input = tokenizer(text, return_tensors='pt')
   output_sequences = model.generate(input_ids=encoded_input['input_ids'].cuda(),max_new_tokens=max_new_tokens,return_dict_in_generate=True )
@@ -88,8 +88,8 @@ def ask_question(paragraph):
 model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 tokenizer = AutoTokenizer.from_pretrained(name)
 
-pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
-recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
+pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type",do_sample=True)
+recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer,do_sample=True)
 
 
 text = '1'
@@ -100,9 +100,9 @@ while text != '0':
     # print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
     model_input = template.format(text)
-    result = pipe(model_input)
+    result = pipe(model_input,max_length=None,max_new_tokens=max_new_tokens)
     print("the pipe result is : \n" + str(result))
-    res2 = recognizer(model_input)
+    res2 = recognizer(model_input,max_length=None,max_new_tokens=max_new_tokens)
     print("the pipe ner result is : \n" + str(res2))
     # ask_question(text)
     print()
