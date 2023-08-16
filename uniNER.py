@@ -32,7 +32,7 @@ while text != '0':
     input_pipe =  prompt.format(text)
     print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
-    result = pipe(text, num_return_sequences=2, return_full_text=False)
+    result = pipe(text, return_full_text=False)
     print("the result is : \n" + str(result))
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
