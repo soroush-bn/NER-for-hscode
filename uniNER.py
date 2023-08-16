@@ -1,7 +1,7 @@
 # Load model directly
 # Use a pipeline as a high-level helper
 from transformers import pipeline
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer,AutoConfig
 import torch
 
 from langchain.llms import HuggingFacePipeline
@@ -13,6 +13,7 @@ from langchain import PromptTemplate, LLMChain
 #     num_beams=4,
 #     max_new_tokens=32,
 # )
+
 max_new_tokens = 512
 def generate_from_model(text,model, tokenizer):
   encoded_input = tokenizer(text, return_tensors='pt')
@@ -50,10 +51,15 @@ text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
 print("loading model ..  \n")
-
+config = AutoConfig.from_pretrained(
+  name,
+  trust_remote_code=True,
+  max_new_tokens=max_new_tokens
+)
 llm = HuggingFacePipeline.from_model_id(
     model_id=name,
     task="text-generation",
+    model_kwargs= {"config":config}
     
 )
 template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
