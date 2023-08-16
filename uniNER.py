@@ -45,32 +45,38 @@ def generate_prompt(instruction: str, paragraph: str = None) -> str:
 
 
 examples = [{"conversations": [{"from": "human", "value": f"Text: I want some Fresh Kiwi Fruits"}, {"from": "gpt", "value": "I've read this text."}, {"from": "human", "value": f"What describes Product in the text?"}, {"from": "gpt", "value": "[]"}]}]
-        
+template = """
+A virtual assistant answers questions from a user based on the provided text.
+USER: Text: {paragraph}
+ASSISTANT: I’ve read this text.
+USER: What describes Products in the text?
+ASSISTANT: (model's predictions in JSON format)
+"""       
 prompt = 'Given a paragraph, your task is to extract Product entity and concept, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
 text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
 print("loading model ..  \n")
-config = AutoConfig.from_pretrained(
-  name,
-  trust_remote_code=True,
-  max_new_tokens=max_new_tokens
-)
-llm = HuggingFacePipeline.from_model_id(
-    model_id=name,
-    task="text-generation",
-    model_kwargs= {'max_length' : max_new_tokens}
+# config = AutoConfig.from_pretrained(
+#   name,
+#   trust_remote_code=True,
+#   max_new_tokens=max_new_tokens
+# )
+# llm = HuggingFacePipeline.from_model_id(
+#     model_id=name,
+#     task="text-generation",
+#     model_kwargs= {'max_length' : max_new_tokens}
     
-)
-template = """
+# )
+template_chain= """
 A virtual assistant answers questions from a user based on the provided text.
 USER: Text: {paragraph}
 ASSISTANT: I’ve read this text.
 USER: What describes Product in the text?
 ASSISTANT: (model's predictions in JSON format)"""
-prompt = PromptTemplate(template=template, input_variables=["paragraph"])
+# prompt = PromptTemplate(template=template, input_variables=["paragraph"])
 
-llm_chain = LLMChain(prompt=prompt, llm=llm)
+# llm_chain = LLMChain(prompt=prompt, llm=llm)
 
 def ask_question(paragraph):
     result = llm_chain(paragraph)
@@ -79,13 +85,12 @@ def ask_question(paragraph):
     print(result)
 
 
-# model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
-# tokenizer = AutoTokenizer.from_pretrained(name)
+model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
+tokenizer = AutoTokenizer.from_pretrained(name)
 
-# pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
-# recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
+pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type")
+recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer)
 
-# model_id = "lmsys/fastchat-t5-3b-v1.0"
 
 text = '1'
 while text != '0':
@@ -94,12 +99,12 @@ while text != '0':
     # input_pipe =  prompt.format(text)
     # print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
-    # model_input = generate_prompt(prompt,text)
-    # result = pipe(model_input)
-    # print("the pipe result is : \n" + str(result))
-    # res2 = recognizer(model_input)
-    # print("the pipe ner result is : \n" + str(res2))
-    ask_question(text)
+    model_input = template.format(text)
+    result = pipe(model_input)
+    print("the pipe result is : \n" + str(result))
+    res2 = recognizer(model_input)
+    print("the pipe ner result is : \n" + str(res2))
+    # ask_question(text)
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
 # result  =generate_from_model(prompt.format("Where is my Fresh Kiwi Fruit ?"),model_8bit,tokenizer)
