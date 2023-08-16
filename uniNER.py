@@ -47,7 +47,7 @@ def generate_prompt(instruction: str, paragraph: str = None) -> str:
 examples = [{"conversations": [{"from": "human", "value": f"Text: I want some Fresh Kiwi Fruits"}, {"from": "gpt", "value": "I've read this text."}, {"from": "human", "value": f"What describes Product in the text?"}, {"from": "gpt", "value": "[]"}]}]
 template = """
 A virtual assistant answers questions from a user based on the provided text.
-USER: Text: {paragraph}
+USER: Text: {}
 ASSISTANT: I’ve read this text.
 USER: What describes Products in the text?
 ASSISTANT: (model's predictions in JSON format)
