@@ -56,7 +56,7 @@ llm = HuggingFacePipeline.from_model_id(
     task="text-generation",
     model_kwargs={"temperature": 0, "max_length": 1000},
 )
-template = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
  What describes Product in the text?
