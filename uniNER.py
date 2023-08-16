@@ -44,7 +44,7 @@ def generate_prompt(instruction: str, paragraph: str = None) -> str:
 
 examples = [{"conversations": [{"from": "human", "value": f"Text: I want some Fresh Kiwi Fruits"}, {"from": "gpt", "value": "I've read this text."}, {"from": "human", "value": f"What describes Product in the text?"}, {"from": "gpt", "value": "[]"}]}]
         
-prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
+prompt = 'Given a paragraph, your task is to extract Product entity and concept, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ]'
 text="Fresh Kiwi Fruit"
 name = "Universal-NER/UniNER-7B-definition"
 path = "./uniner_model/"
