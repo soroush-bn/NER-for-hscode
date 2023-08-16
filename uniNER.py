@@ -59,7 +59,6 @@ config = AutoConfig.from_pretrained(
 llm = HuggingFacePipeline.from_model_id(
     model_id=name,
     task="text-generation",
-    device=0,
     model_kwargs= {'max_length' : max_new_tokens}
     
 )
