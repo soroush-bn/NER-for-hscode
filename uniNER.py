@@ -62,14 +62,12 @@ llm = HuggingFacePipeline.from_model_id(
     model_kwargs= {'max_length' : max_new_tokens}
     
 )
-template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-
-### Instruction:
- What describes Product in the text?
-### Input:
-{paragraph}
-
-### Response:"""
+template = """
+A virtual assistant answers questions from a user based on the provided text.
+USER: Text: {}
+ASSISTANT: I’ve read this text.
+USER: What describes Product in the text?
+ASSISTANT: (model's predictions in JSON format)"""
 prompt = PromptTemplate(template=template, input_variables=["paragraph"])
 
 llm_chain = LLMChain(prompt=prompt, llm=llm)
