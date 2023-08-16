@@ -5,17 +5,17 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 
-generation_config = GenerationConfig(
-    temperature=0.2,
-    top_p=0.75,
-    top_k=40,
-    num_beams=4,
-    max_new_tokens=32,
-)
+# generation_config = GenerationConfig(
+#     temperature=0.2,
+#     top_p=0.75,
+#     top_k=40,
+#     num_beams=4,
+#     max_new_tokens=32,
+# )
 max_new_tokens = 512
 def generate_from_model(text,model, tokenizer):
   encoded_input = tokenizer(text, return_tensors='pt')
-  output_sequences = model.generate(input_ids=encoded_input['input_ids'].cuda(),max_new_tokens=max_new_tokens,generation_config=generation_config,
+  output_sequences = model.generate(input_ids=encoded_input['input_ids'].cuda(),max_new_tokens=max_new_tokens
         return_dict_in_generate=True )
   print("out sequence is : " +  str(output_sequences))
   return tokenizer.decode(output_sequences[0], skip_special_tokens=True,clean_up_tokenization_spaces=False)
