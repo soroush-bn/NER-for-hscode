@@ -95,7 +95,7 @@ recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer,d
 text = '1'
 while text != '0':
     text = str(input("enter your input : \n"))
-     if text == '' : continue  
+    if text == '' : continue  
     # input_pipe =  prompt.format(text)
     # print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
