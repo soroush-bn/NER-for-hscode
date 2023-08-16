@@ -21,7 +21,7 @@ def generate_from_model(text,model, tokenizer):
 
 
 def generate_prompt(instruction: str, paragraph: str = None) -> str:
-    if input_ctxt:
+    if paragraph:
         return f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
