@@ -13,7 +13,7 @@ from langchain import PromptTemplate, LLMChain
 #     num_beams=4,
 #     max_new_tokens=32,
 # )
-max_new_tokens = 512
+max_new_tokens = 1024
 def generate_from_model(text,model, tokenizer):
   encoded_input = tokenizer(text, return_tensors='pt')
   output_sequences = model.generate(input_ids=encoded_input['input_ids'].cuda(),max_new_tokens=max_new_tokens,return_dict_in_generate=True )
