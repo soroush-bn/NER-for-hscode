@@ -87,7 +87,7 @@ def ask_question(paragraph):
 # model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 # tokenizer = AutoTokenizer.from_pretrained(name)
 
-pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type",do_sample=True,max_new_tokens=max_new_tokens,)
+pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type",do_sample=True)
 # recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer,do_sample=True,max_new_tokens=max_new_tokens)
 
 
@@ -100,7 +100,7 @@ while text != '0':
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
     model_input = template.format(text)
     with Timer():
-      result = pipe(model_input)
+      result = pipe(model_input,max_new_tokens=max_new_tokens)
     print("the pipe result is : \n" + str(result))
     # res2 = recognizer(model_input)
     # print("the pipe ner result is : \n" + str(res2))
