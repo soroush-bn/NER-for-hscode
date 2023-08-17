@@ -83,7 +83,9 @@ def ask_question(paragraph):
     print("result is  ======> : \n")
     print(result)
 
-
+def get_raw_answer(answer):
+  answer_list = answer.split('\n')
+  return answer[-1]
 model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 tokenizer = AutoTokenizer.from_pretrained(name)
 
@@ -99,13 +101,14 @@ while text != '0':
     # print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
     model_input = template.format(text)
-    with Timer():
+    with Timer("Type model"):
       result = pipe(model_input,max_new_tokens=max_new_tokens)
+      
+    with Timer("Defenition model"):
       res2 = recognizer(model_input,max_new_tokens=max_new_tokens)
-
-    print("the pipe result is : \n" + str(result))
+    print("the pipe result is : \n" + str(get_raw_answer(result)))
     # res2 = recognizer(model_input)
-    print("the pipe ner result is : \n" + str(res2))
+    print("the pipe ner result is : \n" + str(get_raw_answer(res2)))
     # ask_question(text)
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
