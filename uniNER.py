@@ -84,7 +84,7 @@ def ask_question(paragraph):
     print(result)
 
 def get_raw_answer(answer):
-  answer_list = answer.split('\n')
+  answer_list = answer[0]['generated_text'].split('\n')
   return answer[-1]
 model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_in_8bit=True)
 tokenizer = AutoTokenizer.from_pretrained(name)
