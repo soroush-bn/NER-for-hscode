@@ -103,12 +103,12 @@ while text != '0':
     model_input = template.format(text)
     with Timer("Type model"):
       result = pipe(model_input,max_new_tokens=max_new_tokens)
-      
+    print("the pipe result is : \n" + result[0]['generated_text'].split('\n')[-1])
+
     with Timer("Defenition model"):
       res2 = recognizer(model_input,max_new_tokens=max_new_tokens)
-    print("the pipe result is : \n" + str(get_raw_answer(result)))
     # res2 = recognizer(model_input)
-    print("the pipe ner result is : \n" + str(get_raw_answer(res2)))
+    print("the pipe ner result is : \n" + res2[0]['generated_text'].split('\n')[-1])
     # ask_question(text)
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
