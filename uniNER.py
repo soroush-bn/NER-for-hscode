@@ -88,7 +88,7 @@ model_8bit = AutoModelForCausalLM.from_pretrained(name, device_map="auto", load_
 tokenizer = AutoTokenizer.from_pretrained(name)
 
 pipe = pipeline("text-generation", model="Universal-NER/UniNER-7B-type",do_sample=True)
-# recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer,do_sample=True,max_new_tokens=max_new_tokens)
+recognizer = pipeline("text-generation", model=model_8bit, tokenizer=tokenizer,do_sample=True,max_new_tokens=max_new_tokens)
 
 
 text = '1'
@@ -101,9 +101,11 @@ while text != '0':
     model_input = template.format(text)
     with Timer():
       result = pipe(model_input,max_new_tokens=max_new_tokens)
+      res2 = recognizer(model_input,max_new_tokens=max_new_tokens)
+
     print("the pipe result is : \n" + str(result))
     # res2 = recognizer(model_input)
-    # print("the pipe ner result is : \n" + str(res2))
+    print("the pipe ner result is : \n" + str(res2))
     # ask_question(text)
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
