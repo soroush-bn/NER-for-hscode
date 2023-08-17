@@ -6,6 +6,8 @@ import torch
 from timer import Timer
 from langchain.llms import HuggingFacePipeline
 from langchain import PromptTemplate, LLMChain
+import logging
+logging.basicConfig(filename='outputs.log',level=logging.INFO)
 # generation_config = GenerationConfig(
 #     temperature=0.2,
 #     top_p=0.75,
@@ -101,14 +103,17 @@ while text != '0':
     # print("ur paragraph is :  \n" + str(input_pipe))
     # result  =generate_from_model(input_pipe,model_8bit,tokenizer)
     model_input = template.format(text)
-    with Timer("Type model"):
+    logging.info("input: " + str(text))
+    with Timer("Type model",logging):
       result = pipe(model_input,max_new_tokens=max_new_tokens)
     print("the pipe result is : \n" + result[0]['generated_text'].split('\n')[-1])
+    logging.info("the pipe result is : \n" + result[0]['generated_text'].split('\n')[-1])
 
-    with Timer("Defenition model"):
+    with Timer("Defenition model",logging):
       res2 = recognizer(model_input,max_new_tokens=max_new_tokens)
     # res2 = recognizer(model_input)
     print("the pipe ner result is : \n" + res2[0]['generated_text'].split('\n')[-1])
+    logging.info("the pipe ner result is : \n" + res2[0]['generated_text'].split('\n')[-1])
     # ask_question(text)
     print()
     # prompt = 'Given a paragraph, your task is to extract all entities and concepts, and define their type using a short sentence. The output should be in the following format: [("entity", "definition of entity type in a short sentence"), ... ] the paragraph is : {}'
