@@ -24,5 +24,5 @@ class Timer():
         self._start_time = None
         elapsed =f"Elapsed time of {self.class_under_estimation}: {elapsed_time:0.4f} seconds"
         print(elapsed)
-        if self.logger is not None : logger.info(elapsed)
+        if self.logger is not None : self.logger.info(elapsed)
         
